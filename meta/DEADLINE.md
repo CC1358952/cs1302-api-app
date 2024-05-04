@@ -2,7 +2,7 @@
 
 ## Part 1.1: App Description
 
-This app allows a user to input a current NHL player's name and it returns
+This app allows a user to input a current NHL player's name and team and it returns
 some basic info about the player and weather metrics for the city where they
 were born in. The first API is an NHL player/statistic API that returns (in my
 case) the name, team, position, and city of birth. The second is a weather API
@@ -74,3 +74,11 @@ and therefore more time to make the concept the best it can be.
 I'm still proud of what I have created. If you showed me this project at the beginning of the semester and said
 that I built this a few months later, I would not have believed you. This project did a good job of showcasing and
 implementing most of the new things I learned this semester.
+
+## Final Attribution Notes:
+
+1) I cited the NHL Logos I used to the best of my abilities and feel that I am within the bounds of fair use.
+That being said, I do not want this being publicly shared outside of the university for the sake precaution.
+
+2) The weather images are sourced from the WeatherAPI. I used the link on their documentation to download the
+ZIP file and uploaded them into the project for the sake of speed.
