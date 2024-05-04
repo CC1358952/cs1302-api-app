@@ -1,10 +1,5 @@
 # Deadline
 
-Modify this file to satisfy a submission requirement related to the project
-deadline. Please keep this file organized using Markdown. If you click on
-this file in your GitHub repository website, then you will see that the
-Markdown is transformed into nice-looking HTML.
-
 ## Part 1.1: App Description
 
 This app allows a user to input a current NHL player's name and it returns
@@ -15,6 +10,8 @@ takes in the city of birth term and returns the temperature, wind speed,
 precipitation, humidity, a short description, and the code for an image which I
 saved as a local resource to speed up the loading process.
 
+The app displays the current weather and player information, both of which cannot be
+accessed by utilizing one API by itself.
 ### GitHub Repo Link:
 ```
 https://github.com/CC1358952/cs1302-api-app/tree/main
