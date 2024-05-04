@@ -1,6 +1,7 @@
 # Assets
 
 ##NHL Logos:
+
 * ANA Logo
   - `resources/NHL_Logos/ANA.jpg`
   - Anaheim Ducks. 2024.
@@ -161,7 +162,9 @@
   - Washington Capitals. 2024.
   - https://assets.nhle.com/logos/nhl/svg/WSH_light.svg
   - "Assumed proprietary: using under academic fair use"
+
 ##Weather Daytime Icons:
+
 * 113 Day Icon
   - `resources/weather/64x64/day/113.png`
   - WeatherAPI. 2024.
@@ -402,7 +405,9 @@
   - WeatherAPI. 2024.
   - https://cdn.weatherapi.com/weather/64x64/day/395.png
   - "Assumed proprietary: using under academic fair use"
+
 ##Weather Nighttime Icons:
+
 * 113 Night Icon
   - `resources/weather/64x64/night/113.png`
   - WeatherAPI. 2024.
