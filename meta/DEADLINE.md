@@ -29,7 +29,9 @@ This API returns a JSON response containing information about the player desired
 I chose to utilize the name, teamAbbrev, active, birthCity, and birthCountry variables.
 
 > culture: the language outputs should be in.
+
 > limit: needed to create response, 200 is arbitrary.
+
 > q: the player name to search.
 
 ### API 2
@@ -44,6 +46,7 @@ to get the information I wanted. I chose to utilize the name, and country from t
 the temp_f, mind_mph, precip_in, and humidity from the CurrentWeather class, and the text and icon
 url from the Condition class.
 > key: the API key necessary to run.
+
 > q: city name to search.
 
 ## Part 2: New
