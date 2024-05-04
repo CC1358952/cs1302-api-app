@@ -38,6 +38,8 @@ import javafx.stage.Stage;
 import com.google.gson.annotations.SerializedName;
 import javafx.scene.text.TextAlignment;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+
 /**
  * REPLACE WITH NON-SHOUTING DESCRIPTION OF YOUR APP.
  */
@@ -69,7 +71,6 @@ public class ApiApp extends Application {
     Button search;
     HBox infoTab;
     Text logoCredit;
-
     HBox teamContent;
     ImageView teamImg;
     HBox weatherContent;
@@ -79,33 +80,24 @@ public class ApiApp extends Application {
     VBox playerInfo;
     Text playerNameLabel;
     Text playerName;
-
     Text playerTeamLabel;
     Text playerTeam;
-
     Text playerPositionLabel;
     Text playerPosition;
-
     Text playerCityLabel;
     Text playerCity;
-
     //Objects to display weather information
     VBox weatherInfo;
     Text tempLabel;
     Text temp;
-
     Text windLabel;
     Text wind;
-
     Text precipLabel;
     Text precip;
-
     Text humidityLabel;
     Text humidity;
-
     Text descriptionLabel;
     Text description;
-
     VBox content;
     Label notice;
     ComboBox teamSelect;
@@ -124,127 +116,18 @@ public class ApiApp extends Application {
     /** {@inheritDoc} */
     @Override
     public void init() {
-        this.stage = stage;
-        this.input = new TextField();
-        input.setPrefWidth(6 * WIDTH / 10);
-        this.search = new Button("SEARCH");
-        this.content = new VBox(5);
-        this.teamContent = new HBox(5);
-        this.weatherContent = new HBox(5);
-        this.teamImg = new ImageView(
-            new Image("file:resources/NHL_Logos/NHL.jpg"));
-        teamImg.setPreserveRatio(true);
-        teamImg.setFitWidth(6 * WIDTH / 10);
-        this.weatherImg = new ImageView(
-            new Image("file:resources/default.png"));
-        weatherImg.setPreserveRatio(true);
-        weatherImg.setFitWidth(6 * WIDTH / 10);
-        this.infoTab = new HBox(8);
-        this.teamList = FXCollections.observableArrayList("ANA", "ARI", "BOS",
-            "BUF", "CGY", "CAR", "CHI", "COL", "CBJ", "DAL", "DET", "EDM", "FLA",
-            "LAK", "MIN", "MTL", "NSH", "NJD", "NYI", "NYR", "OTT", "PHI", "PIT",
-            "SEA", "SJS", "STL", "TBL", "TOR", "VAN", "VGK", "WSH", "WPG");
-        this.teamSelect = new ComboBox(teamList);
-        this.noticeBox = new HBox();
-        noticeBox.setAlignment(Pos.CENTER_LEFT);
-        this.notice = new Label("Input an active NHL Player's last name:");
-        notice.setTextAlignment(TextAlignment.LEFT);
-        noticeBox.getChildren().addAll(notice);
-        search.setOnAction(event -> {
-            Runnable a = () -> {
-                search(input.getText().toLowerCase(), teamSelect.getValue().toString());
-            };
-            Thread t = new Thread(a);
-            t.start();
-        });
-        this.playerInfo = new VBox();
-        this.playerNameLabel = new Text("Name:");
-        playerNameLabel.setFont(LABEL);
-        this.playerName = new Text("");
-        playerName.setFont(CONTENT);
-        this.playerTeamLabel = new Text("Team:");
-        playerTeamLabel.setFont(LABEL);
-        this.playerTeam = new Text("");
-        playerTeam.setFont(CONTENT);
-        this.playerPositionLabel = new Text("Position:");
-        playerPositionLabel.setFont(LABEL);
-        this.playerPosition = new Text("");
-        playerPosition.setFont(CONTENT);
-        this.playerCityLabel = new Text("Birth City:");
-        playerCityLabel.setFont(LABEL);
-        this.playerCity = new Text("");
-        playerCity.setFont(CONTENT);
-        playerInfo.getChildren().addAll(playerNameLabel);
-        playerInfo.getChildren().addAll(playerName);
-        playerInfo.getChildren().addAll(playerTeamLabel);
-        playerInfo.getChildren().addAll(playerTeam);
-        playerInfo.getChildren().addAll(playerPositionLabel);
-        playerInfo.getChildren().addAll(playerPosition);
-        playerInfo.getChildren().addAll(playerCityLabel);
-        playerInfo.getChildren().addAll(playerCity);
+        loadGeneral();
+        loadNHL();
+        loadWeather();
     }
 
     /** {@inheritDoc} */
     @Override
     public void start(Stage stage) {
-        //Weather Content
-        this.weatherInfo = new VBox();
-        this.tempLabel = new Text("Temperature:");
-        tempLabel.setFont(LABEL);
-        this.temp = new Text("");
-        temp.setFont(CONTENT);
-        this.windLabel = new Text("Wind Speed:");
-        windLabel.setFont(LABEL);
-        this.wind = new Text("");
-        wind.setFont(CONTENT);
-        this.precipLabel = new Text("Percipitation:");
-        precipLabel.setFont(LABEL);
-        this.precip = new Text("");
-        precip.setFont(CONTENT);
-        this.humidityLabel = new Text("Humidity:");
-        humidityLabel.setFont(LABEL);
-        this.humidity = new Text("");
-        humidity.setFont(CONTENT);
-        this.descriptionLabel = new Text("Description:");
-        descriptionLabel.setFont(LABEL);
-        this.description = new Text("");
-        description.setFont(CONTENT);
-        weatherInfo.getChildren().addAll(tempLabel);
-        weatherInfo.getChildren().addAll(temp);
-        weatherInfo.getChildren().addAll(windLabel);
-        weatherInfo.getChildren().addAll(wind);
-        weatherInfo.getChildren().addAll(precipLabel);
-        weatherInfo.getChildren().addAll(precip);
-        weatherInfo.getChildren().addAll(humidityLabel);
-        weatherInfo.getChildren().addAll(humidity);
-        weatherInfo.getChildren().addAll(descriptionLabel);
-        weatherInfo.getChildren().addAll(description);
-        //General Content
-        teamContent.getChildren().addAll(teamImg);
-        teamContent.getChildren().addAll(playerInfo);
-        weatherContent.getChildren().addAll(weatherInfo);
-        weatherContent.getChildren().addAll(weatherImg);
-        content.getChildren().addAll(teamContent);
-        content.getChildren().addAll(weatherContent);
-        infoTab.getChildren().addAll(teamSelect);
-        infoTab.getChildren().addAll(input);
-        infoTab.getChildren().addAll(search);
-        this.logoCredit = new Text("All NHL logos used are the property of their respective team.\n"
-            + "Not affiliated with the NHL or any team."
-            + "\nIcons used were sourced from WeatherAPI.");
-        logoCredit.setTextAlignment(TextAlignment.CENTER);
-        root.getChildren().addAll(noticeBox);
-        root.getChildren().addAll(infoTab);
-        root.getChildren().addAll(content);
-        root.getChildren().addAll(logoCredit);
-        root.setAlignment(Pos.TOP_CENTER);
-        scene = new Scene(root);
-        stage.setTitle("ApiApp!");
-        stage.setScene(scene);
-        stage.setOnCloseRequest(event -> Platform.exit());
-        stage.sizeToScene();
-        Platform.runLater(() -> stage.setResizable(false));
-        stage.show();
+        this.stage = stage;
+        buildNHL();
+        buildWeather();
+        buildElse();
     } // start
 
     /**Function that searches and displays the information requested
@@ -253,22 +136,23 @@ public class ApiApp extends Application {
      * @param team the team of the desired player.*/
     public void search(String term, String team) {
         try {
-
             URI nURI = createURI(NHLBASE, term);
             NHLResponse player = nhlRequest(nURI, team);
-            System.out.println("============================================================");
-            System.out.println(player.name);
-
-            URI wURI = createURI(WEATHERBASE, player.birthCity);
+            String city;
+            if (player.birthCity.equals("Cole Harbour")) {
+                city = "Dartmouth";
+                System.out.println("=======================================================");
+                System.out.println("THE SIDNEY CROSBY EXCEPTION");
+                System.out.println("YOU ARE BEING RELOCATED TO DARTMOUTH, NOVA SCOTIA");
+                System.out.println("=======================================================");
+                System.out.println("I have NO idea why the WeatherApi changes " +
+                    "Cole Harbour, Nova Scotia to Marsh Harbour, Bahamas XD");
+                System.out.println("=======================================================");
+            } else {
+                city = player.birthCity;
+            }
+            URI wURI = createURI(WEATHERBASE, city);
             WeatherResponse wResponse = weatherRequest(wURI);
-
-            System.out.println("==============================================");
-
-            System.out.println(wResponse.current.tempF);
-            System.out.println("============================================");
-            System.out.println(String.format("Name: %s, Position: %s, Team: %s, Birthplace: %s",
-                player.name, player.positionCode, player.teamAbbrev, player.birthCity));
-
             //Set display information
             Runnable r = () -> {
                 teamImg.setImage(new Image(String.format("file:resources/NHL_Logos/%s.jpg",
@@ -277,7 +161,6 @@ public class ApiApp extends Application {
                 playerTeam.setText(player.teamAbbrev);
                 playerPosition.setText(player.positionCode);
                 playerCity.setText(player.birthCity);
-
                 String code = wResponse.current.condition.icon.substring(20);
                 weatherImg.setImage(new Image("file:resources" + code));
                 temp.setText("" + wResponse.current.tempF + "\u00B0F");
@@ -291,15 +174,20 @@ public class ApiApp extends Application {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (IndexOutOfBoundsException e) {
             Runnable r = () -> {
                 Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass() +
                     "\nThat didn't work! Try this:\n-->Check your spelling\n-->Check your team" +
-                    "\n-->Try another player");
+                    "\n-->Make sure your player is active");
                 alert.showAndWait();
-                System.out.println("HERE");
+            };
+            Platform.runLater(r);
+        } catch (IllegalArgumentException e) {
+            Runnable r = () -> {
+                Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass() +
+                    "\nThat didn't work! Try this:\n-->Please remove symbols such as slashes." +
+                    "\nThe only acceptable symbols are dashes (-) and apostrophes (').");
+                alert.showAndWait();
             };
             Platform.runLater(r);
         }
@@ -324,7 +212,7 @@ public class ApiApp extends Application {
      * @throws InterruptedException.
      * @throws IllegalArgumentException. */
     public static NHLResponse nhlRequest(URI uri, String team) throws IOException,
-        InterruptedException {
+        InterruptedException, IllegalArgumentException {
         HttpRequest request = HttpRequest.newBuilder().uri(uri).build();
         HttpResponse<String> response = HTTP_CLIENT.send(request, BodyHandlers.ofString());
         NHLResponse[] respArr = GSON.fromJson(response.body(), NHLResponse[].class);
@@ -337,8 +225,6 @@ public class ApiApp extends Application {
                     players.add(respArr[i]);
                 }
             }
-
-            //System.out.println(players.toString());
             NHLResponse resp = players.get(0);
             return resp;
         }
@@ -357,4 +243,172 @@ public class ApiApp extends Application {
         return resp;
     }
 
+    /**Helper method to load nhl objects.*/
+    public void loadNHL() {
+        this.teamContent = new HBox(5);
+        this.teamImg = new ImageView(new Image("file:resources/NHL_Logos/NHL.jpg"));
+        teamImg.setPreserveRatio(true);
+        teamImg.setFitWidth(6 * WIDTH / 10);
+        this.playerInfo = new VBox();
+
+        this.playerNameLabel = new Text("Name:");
+        playerNameLabel.setFont(LABEL);
+        this.playerName = new Text("");
+        playerName.setFont(CONTENT);
+        this.playerTeamLabel = new Text("Team:");
+        playerTeamLabel.setFont(LABEL);
+        this.playerTeam = new Text("");
+        playerTeam.setFont(CONTENT);
+        this.playerPositionLabel = new Text("Position:");
+        playerPositionLabel.setFont(LABEL);
+        this.playerPosition = new Text("");
+        playerPosition.setFont(CONTENT);
+        this.playerCityLabel = new Text("Birth City:");
+        playerCityLabel.setFont(LABEL);
+        this.playerCity = new Text("");
+        playerCity.setFont(CONTENT);
+
+
+    }
+
+    /**Helper method that builds out NHL content.*/
+    public void buildNHL() {
+        playerInfo.getChildren().addAll(playerNameLabel);
+        playerInfo.getChildren().addAll(playerName);
+        playerInfo.getChildren().addAll(playerTeamLabel);
+        playerInfo.getChildren().addAll(playerTeam);
+        playerInfo.getChildren().addAll(playerPositionLabel);
+        playerInfo.getChildren().addAll(playerPosition);
+        playerInfo.getChildren().addAll(playerCityLabel);
+        playerInfo.getChildren().addAll(playerCity);
+
+        teamContent.getChildren().addAll(teamImg);
+        teamContent.getChildren().addAll(playerInfo);
+    }
+
+    /**Helper method to load weather objects.*/
+    public void loadWeather() {
+        this.weatherInfo = new VBox();
+        this.weatherContent = new HBox(5);
+        this.weatherImg = new ImageView(new Image("file:resources/default.png"));
+        weatherImg.setPreserveRatio(true);
+        weatherImg.setFitWidth(5 * WIDTH / 10);
+
+        this.tempLabel = new Text("Temperature:");
+        tempLabel.setFont(LABEL);
+        this.temp = new Text("");
+        temp.setFont(CONTENT);
+        this.windLabel = new Text("Wind Speed:");
+        windLabel.setFont(LABEL);
+        this.wind = new Text("");
+        wind.setFont(CONTENT);
+        this.precipLabel = new Text("Precipitation:");
+        precipLabel.setFont(LABEL);
+        this.precip = new Text("");
+        precip.setFont(CONTENT);
+        this.humidityLabel = new Text("Humidity:");
+        humidityLabel.setFont(LABEL);
+        this.humidity = new Text("");
+        humidity.setFont(CONTENT);
+        this.descriptionLabel = new Text("Description:");
+        descriptionLabel.setFont(LABEL);
+        this.description = new Text("");
+        description.setFont(CONTENT);
+    }
+
+    /**Helper method to connect weather objects.*/
+    public void buildWeather() {
+        weatherInfo.getChildren().addAll(tempLabel);
+        weatherInfo.getChildren().addAll(temp);
+        weatherInfo.getChildren().addAll(windLabel);
+        weatherInfo.getChildren().addAll(wind);
+        weatherInfo.getChildren().addAll(precipLabel);
+        weatherInfo.getChildren().addAll(precip);
+        weatherInfo.getChildren().addAll(humidityLabel);
+        weatherInfo.getChildren().addAll(humidity);
+        weatherInfo.getChildren().addAll(descriptionLabel);
+        weatherInfo.getChildren().addAll(description);
+
+        weatherContent.getChildren().addAll(weatherInfo);
+        weatherContent.getChildren().addAll(weatherImg);
+    }
+
+    /**Helper method to load general objects.*/
+    public void loadGeneral() {
+        //User input tab:
+        this.noticeBox = new HBox();
+        this.notice = new Label("Input an active NHL player's last name");
+        notice.setTextAlignment(TextAlignment.LEFT);
+
+        this.infoTab = new HBox(8);
+        this.teamList = FXCollections.observableArrayList("ANA", "ARI", "BOS", "BUF",
+            "CGY", "CAR", "CHI", "COL", "CBJ", "DAL", "DET", "EDM", "FLA", "LAK", "MIN",
+            "MTL", "NSH", "NJD", "NYI", "NYR", "OTT", "PHI", "PIT", "SEA", "SJS", "STL",
+            "TBL", "TOR", "VAN", "VGK", "WSH", "WPG");
+        this.teamSelect = new ComboBox(teamList);
+        this.input = new TextField();
+        input.setPrefWidth(6 * WIDTH / 10);
+        this.search = new Button("SEARCH");
+
+        this.content = new VBox(5);
+
+        this.logoCredit = new Text("All NHL logos used are the property of their teams." +
+            "\nNot affiliated with the NHL or any team.\nIcons used were sourced from WeatherAPI.");
+        logoCredit.setTextAlignment(TextAlignment.CENTER);
+
+        search.setOnAction(event -> {
+            Runnable r = () -> {
+                try {
+                    if (input.getText().toLowerCase().equals("")) {
+                        throw new IllegalStateException();
+                    }
+                    search(input.getText().toLowerCase(), teamSelect.getValue().toString());
+                } catch (NullPointerException e) {
+                    Runnable r2 = () -> {
+                        Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass()
+                            + "\nThat didn't work! Try this:\n -->Please populate the " +
+                            "team dropdown, then try again.");
+                        alert.showAndWait();
+                    };
+                    Platform.runLater(r2);
+                } catch (IllegalStateException e) {
+                    Runnable r3 = () -> {
+                        Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass()
+                            + "\nThat didn't work! Try this:\n -->Please populate the " +
+                            "player name text field, then try again.");
+                        alert.showAndWait();
+                    };
+                    Platform.runLater(r3);
+                }
+            };
+            Thread t = new Thread(r);
+            t.start();
+        });
+    }
+
+    /**Helper method to build the app structure.*/
+    public void buildElse() {
+        content.getChildren().addAll(teamContent);
+        content.getChildren().addAll(weatherContent);
+        infoTab.getChildren().addAll(teamSelect);
+        infoTab.getChildren().addAll(input);
+        infoTab.getChildren().addAll(search);
+
+        root.getChildren().addAll(noticeBox);
+        root.getChildren().addAll(infoTab);
+        root.getChildren().addAll(content);
+        root.getChildren().addAll(logoCredit);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setMargin(content, new Insets(6.5));
+        root.setStyle("-fx-background-color: #FFFFFF;");
+
+        scene = new Scene(root);
+        stage.setTitle("NHL Birth City Weather Tracker");
+        stage.setScene(scene);
+        stage.setOnCloseRequest(event -> Platform.exit());
+        stage.sizeToScene();
+        Platform.runLater(() -> stage.setResizable(false));
+        stage.show();
+
+    }
 } // ApiApp
