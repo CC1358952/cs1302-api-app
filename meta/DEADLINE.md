@@ -49,7 +49,7 @@ url from the Condition class.
 
 > q: city name to search.
 
-## Part 2: New
+## Part 2: New Knowledge
 
 In past projects, we did a lot of work on handling exceptions, however, in this project, I feel I gained a
 better grasp on predicting errors from the user and functions and then catching them in the appropriate
@@ -78,7 +78,7 @@ implementing most of the new things I learned this semester.
 ## Final Attribution Notes:
 
 1) I cited the NHL Logos I used to the best of my abilities and feel that I am within the bounds of fair use.
-That being said, I do not want this being publicly shared outside of the university for the sake precaution.
+That being said, I do not want this being publicly shared outside of the university for the sake of precaution.
 
 2) The weather images are sourced from the WeatherAPI. I used the link on their documentation to download the
 ZIP file and uploaded them into the project for the sake of speed.
