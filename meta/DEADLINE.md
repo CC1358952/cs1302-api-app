@@ -7,14 +7,18 @@ Markdown is transformed into nice-looking HTML.
 
 ## Part 1.1: App Description
 
-> Please provide a friendly description of your app, including
-> the primary functions available to users of the app. Be sure to
-> describe exactly what APIs you are using and how they are connected
-> in a meaningful way.
+This app allows a user to input a current NHL player's name and it returns
+some basic info about the player and weather metrics for the city where they
+were born in. The first API is an NHL player/statistic API that returns (in my
+case) the name, team, position, and city of birth. The second is a weather API
+takes in the city of birth term and returns the temperature, wind speed,
+precipitation, humidity, a short description, and the code for an image which I
+saved as a local resource to speed up the loading process.
 
-> **Also, include the GitHub `https` URL to your repository.**
-
-TODO WRITE / REPLACE
+### GitHub Repo Link:
+```
+https://github.com/CC1358952/cs1302-api-app/tree/main
+```
 
 ## Part 1.2: APIs
 
@@ -31,7 +35,9 @@ TODO WRITE / REPLACE
 https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=200&q=mcdavid
 ```
 
-> Replace this line with notes (if needed) or remove it (if not needed).
+> culture: the language outputs should be in.
+> limit: needed to create response, 200 is arbitrary.
+> q: the player name to search.
 
 ### API 2
 
@@ -39,7 +45,8 @@ https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=200&q=mcdavi
 https://api.weatherapi.com/v1/current.json?key=04ef81b3a35e42ccb9e144659240205&q=Richmond+Hill
 ```
 
-> Replace this line with notes (if needed) or remove it (if not needed).
+> key: the API key necessary to run.
+> q: city name to search.
 
 ## Part 2: New
 
