@@ -8,4 +8,5 @@ public class NHLResponse {
     String teamAbbrev;
     boolean active;
     String birthCity;
+    String birthCountry;
 }

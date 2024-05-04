@@ -28,7 +28,7 @@ TODO WRITE / REPLACE
 ### API 1
 
 ```
-https://.../replace/me
+https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=200&q=mcdavid
 ```
 
 > Replace this line with notes (if needed) or remove it (if not needed).
@@ -36,7 +36,7 @@ https://.../replace/me
 ### API 2
 
 ```
-https://../replace/me
+https://api.weatherapi.com/v1/current.json?key=04ef81b3a35e42ccb9e144659240205&q=Richmond+Hill
 ```
 
 > Replace this line with notes (if needed) or remove it (if not needed).

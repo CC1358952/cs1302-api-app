@@ -39,6 +39,7 @@ import com.google.gson.annotations.SerializedName;
 import javafx.scene.text.TextAlignment;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import java.util.Locale;
 
 /**
  * REPLACE WITH NON-SHOUTING DESCRIPTION OF YOUR APP.
@@ -155,19 +156,7 @@ public class ApiApp extends Application {
             WeatherResponse wResponse = weatherRequest(wURI);
             //Set display information
             Runnable r = () -> {
-                teamImg.setImage(new Image(String.format("file:resources/NHL_Logos/%s.jpg",
-                    player.teamAbbrev)));
-                playerName.setText(player.name);
-                playerTeam.setText(player.teamAbbrev);
-                playerPosition.setText(player.positionCode);
-                playerCity.setText(player.birthCity);
-                String code = wResponse.current.condition.icon.substring(20);
-                weatherImg.setImage(new Image("file:resources" + code));
-                temp.setText("" + wResponse.current.tempF + "\u00B0F");
-                wind.setText("" + wResponse.current.windMPH + " mph");
-                precip.setText("" + wResponse.current.precipIN + " in");
-                humidity.setText("" + wResponse.current.humidity + "\u0025");
-                description.setText("" + wResponse.current.condition.text);
+                setInfo(player, wResponse);
             };
             Platform.runLater(r);
         } catch (IOException e) {
@@ -177,7 +166,7 @@ public class ApiApp extends Application {
         } catch (IndexOutOfBoundsException e) {
             Runnable r = () -> {
                 Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass() +
-                    "\nThat didn't work! Try this:\n-->Check your spelling\n-->Check your team" +
+                    "\nThat didn't work! Try this:\n-->Check your team" +
                     "\n-->Make sure your player is active");
                 alert.showAndWait();
             };
@@ -185,8 +174,9 @@ public class ApiApp extends Application {
         } catch (IllegalArgumentException e) {
             Runnable r = () -> {
                 Alert alert = new Alert(AlertType.ERROR, "Exception: " + e.getClass() +
-                    "\nThat didn't work! Try this:\n-->Please remove symbols such as slashes." +
-                    "\nThe only acceptable symbols are dashes (-) and apostrophes (').");
+                    "\nThat didn't work! Try this:\n-->Check your spelling." +
+                    "\n-->Please remove symbols such as slashes." +
+                    "\n[The only acceptable symbols are dashes (-) and apostrophes (').]");
                 alert.showAndWait();
             };
             Platform.runLater(r);
@@ -243,7 +233,26 @@ public class ApiApp extends Application {
         return resp;
     }
 
-    /**Helper method to load nhl objects.*/
+    /**Helper method to set info for labels.
+     * @param player the NHLResponse to get info from.
+     * @param wResponse the WeatherResponse to get info from.*/
+    public void setInfo(NHLResponse player, WeatherResponse wResponse) {
+        teamImg.setImage(new Image(String.format("file:resources/NHL_Logos/%s.jpg",
+            player.teamAbbrev)));
+        playerName.setText(player.name);
+        playerTeam.setText(player.teamAbbrev);
+        playerPosition.setText(player.positionCode);
+        playerCity.setText(player.birthCity + ", " + player.birthCountry);
+        String code = wResponse.current.condition.icon.substring(20);
+        weatherImg.setImage(new Image("file:resources" + code));
+        temp.setText("" + wResponse.current.tempF + "\u00B0F");
+        wind.setText("" + wResponse.current.windMPH + " mph");
+        precip.setText("" + wResponse.current.precipIN + " in");
+        humidity.setText("" + wResponse.current.humidity + "\u0025");
+        description.setText("" + wResponse.current.condition.text);
+    }
+
+/**Helper method to load nhl objects.*/
     public void loadNHL() {
         this.teamContent = new HBox(5);
         this.teamImg = new ImageView(new Image("file:resources/NHL_Logos/NHL.jpg"));
@@ -411,4 +420,5 @@ public class ApiApp extends Application {
         stage.show();
 
     }
+
 } // ApiApp
